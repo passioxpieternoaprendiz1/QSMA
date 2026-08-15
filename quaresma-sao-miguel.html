@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0B0F19">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Ofensiva — Quaresma de São Miguel Arcanjo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-900:#080B13;
+    --ink-800:#0B0F19;
+    --ink-700:#141A2A;
+    --ink-600:#202940;
+    --gold:#C9A227;
+    --gold-bright:#F0C954;
+    --gold-dim:#8A7020;
+    --wine:#6B1420;
+    --wine-bright:#9C2436;
+    --ember:#FF7A3C;
+    --ember-core:#FFD27A;
+    --parchment:#EFE6D3;
+    --parchment-dim:#B7AF9C;
+    --parchment-faint:#7D7969;
+    --shadow-deep: 0 20px 60px rgba(0,0,0,0.55);
+    --radius-lg: 22px;
+    --radius-md: 14px;
+    --radius-sm: 8px;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --nav-h: 68px;
+  }
+
+  *{ box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+  html,body{ margin:0; padding:0; height:100%; }
+  body{
+    font-family:'Inter', system-ui, sans-serif;
+    color:var(--parchment);
+    background:
+      radial-gradient(ellipse 120% 60% at 50% -10%, rgba(201,162,39,0.10), transparent 60%),
+      radial-gradient(ellipse 90% 50% at 85% 10%, rgba(107,20,32,0.18), transparent 55%),
+      var(--ink-800);
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 10% 15%, rgba(239,230,211,0.35), transparent),
+      radial-gradient(1.5px 1.5px at 80% 8%, rgba(239,230,211,0.25), transparent),
+      radial-gradient(1px 1px at 60% 25%, rgba(239,230,211,0.3), transparent),
+      radial-gradient(1.5px 1.5px at 30% 40%, rgba(239,230,211,0.2), transparent),
+      radial-gradient(1px 1px at 92% 45%, rgba(239,230,211,0.25), transparent),
+      radial-gradient(1.5px 1.5px at 15% 70%, rgba(239,230,211,0.18), transparent),
+      radial-gradient(1px 1px at 70% 80%, rgba(239,230,211,0.2), transparent);
+    pointer-events:none;
+    opacity:0.7;
+    z-index:0;
+  }
+
+  .app-shell{ position:relative; z-index:1; max-width:480px; margin:0 auto; min-height:100vh; display:flex; flex-direction:column; }
+
+  /* ---------- Top bar (persistent) ---------- */
+  .topbar{
+    display:flex; align-items:center; justify-content:center; gap:9px;
+    padding: calc(14px + var(--safe-top)) 16px 12px;
+    border-bottom:1px solid rgba(138,112,32,0.25);
+  }
+  .topbar svg{ width:22px; height:22px; flex:none; }
+  .topbar span{
+    font-family:'Cinzel', serif; font-weight:600; letter-spacing:0.14em; font-size:11px;
+    color:var(--gold); text-transform:uppercase;
+  }
+
+  /* ---------- Tabs ---------- */
+  .tab-content{ flex:1; padding: 22px 20px calc(var(--nav-h) + 30px); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; animation: fadeIn .25s ease; }
+  @keyframes fadeIn{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:translateY(0);} }
+
+  .panel-header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+  .panel-header h2{ font-family:'Cinzel', serif; font-size:19px; font-weight:600; margin:0; color:var(--parchment); }
+  .panel-hint{ font-size:12.5px; color:var(--parchment-dim); margin:6px 0 20px; line-height:1.5; }
+
+  .icon-btn{
+    width:36px; height:36px; border-radius:50%; border:1px solid var(--ink-600);
+    background:var(--ink-700); display:flex; align-items:center; justify-content:center;
+    cursor:pointer; color:var(--gold-dim); flex:none;
+  }
+  .icon-btn svg{ width:16px; height:16px; }
+
+  /* ---------- Home ---------- */
+  .home-hero{ text-align:center; margin-bottom:18px; }
+  h1{
+    font-family:'Cinzel Decorative', 'Cinzel', serif; font-weight:700;
+    font-size:24px; line-height:1.25; margin:0 0 8px; color:var(--parchment);
+    text-shadow:0 2px 18px rgba(201,162,39,0.25);
+  }
+  .subtitle{ font-size:13px; color:var(--parchment-dim); margin:0; }
+
+  .divider{
+    width:100%; height:1px; margin:20px 0;
+    background:linear-gradient(90deg, transparent, var(--gold-dim) 20%, var(--gold) 50%, var(--gold-dim) 80%, transparent);
+    opacity:0.55;
+  }
+
+  .greeting{ text-align:center; margin-bottom:4px; }
+  .greeting-name{ font-family:'Cinzel', serif; font-size:16.5px; color:var(--parchment); font-weight:600; }
+  .day-count{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--gold); letter-spacing:0.08em; margin-top:5px; }
+  .prelaunch-note{ font-size:12px; color:var(--parchment-dim); margin-top:4px; }
+
+  .brazier-wrap{ position:relative; display:flex; flex-direction:column; align-items:center; margin: 20px 0 4px; padding: 18px 0 6px; }
+  .halo{
+    position:absolute; top:6px; width:190px; height:190px; border-radius:50%;
+    background:radial-gradient(circle, rgba(240,201,84,0.22), rgba(240,201,84,0.05) 55%, transparent 72%);
+    filter:blur(2px); transition:opacity .6s ease, transform .6s ease; opacity:0.5; transform:scale(0.9);
+  }
+  .brazier-wrap.lit .halo{ opacity:1; transform:scale(1.05); animation: haloPulse 3.2s ease-in-out infinite; }
+  .flame-stage{ position:relative; width:120px; height:150px; z-index:1; }
+  .brazier-base{ position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:96px; height:34px; }
+  .brazier-base svg{ width:100%; height:100%; display:block; }
+  .embers{ position:absolute; bottom:26px; left:50%; transform:translateX(-50%); width:70px; height:16px; }
+  .embers svg{ width:100%; height:100%; display:block; }
+  .embers .glow{ fill:var(--ink-600); transition:fill .6s ease; }
+  .brazier-wrap.lit .embers .glow{ fill:var(--ember); }
+  .flame{ position:absolute; bottom:38px; left:50%; transform:translateX(-50%); width:46px; height:64px; transform-origin:50% 100%; }
+  .flame .tongue{
+    position:absolute; left:50%; bottom:0; border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+    transform:translateX(-50%) rotate(180deg); background: var(--ink-600); opacity:0.55;
+    transition: background 1s ease, opacity 1s ease;
+  }
+  .t1{ width:46px; height:64px; } .t2{ width:32px; height:46px; bottom:2px; } .t3{ width:16px; height:24px; bottom:6px; }
+  .brazier-wrap.lit .t1{ background:linear-gradient(180deg, var(--gold-bright), var(--ember) 55%, var(--wine-bright)); opacity:1; animation: flicker1 2.6s ease-in-out infinite; }
+  .brazier-wrap.lit .t2{ background:linear-gradient(180deg, #FFEFC2, var(--ember-core) 60%, var(--ember)); opacity:1; animation: flicker2 2.1s ease-in-out infinite; }
+  .brazier-wrap.lit .t3{ background:#FFF6DE; opacity:0.95; animation: flicker3 1.6s ease-in-out infinite; }
+  .brazier-wrap.lit .flame-stage{ filter: drop-shadow(0 0 22px rgba(255,122,60,0.45)); }
+  @keyframes flicker1{ 0%,100%{ transform:translateX(-50%) rotate(180deg) scaleY(1) skewX(0deg);} 30%{ transform:translateX(-50%) rotate(180deg) scaleY(1.06) skewX(2deg);} 60%{ transform:translateX(-50%) rotate(180deg) scaleY(0.96) skewX(-2deg);} }
+  @keyframes flicker2{ 0%,100%{ transform:translateX(-50%) rotate(180deg) scaleY(1) skewX(0deg);} 45%{ transform:translateX(-50%) rotate(180deg) scaleY(1.1) skewX(-3deg);} }
+  @keyframes flicker3{ 0%,100%{ transform:translateX(-50%) rotate(180deg) scaleY(1);} 50%{ transform:translateX(-50%) rotate(180deg) scaleY(1.18);} }
+  @keyframes haloPulse{ 0%,100%{ opacity:0.85; transform:scale(1.02);} 50%{ opacity:1; transform:scale(1.1);} }
+
+  .flame-caption{ font-size:11.5px; color:var(--parchment-faint); font-style:italic; margin-top:6px; text-align:center; }
+
+  .streak-badge{ text-align:center; margin-top:8px; }
+  .streak-num{ font-family:'Cinzel Decorative', serif; font-size:32px; font-weight:700; color:var(--parchment-dim); transition:color .6s ease, text-shadow .6s ease; line-height:1; }
+  .streak-badge.lit .streak-num{ color:var(--gold-bright); text-shadow:0 0 24px rgba(240,201,84,0.5); }
+  .streak-label{ font-family:'Cinzel', serif; font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:var(--parchment-faint); margin-top:2px; }
+
+  .cta-btn{
+    display:block; width:100%; margin-top:22px; padding:16px 18px; border-radius:999px; border:1px solid var(--gold-dim);
+    background:linear-gradient(180deg, var(--ink-700), var(--ink-800)); color:var(--gold-bright);
+    font-family:'Cinzel', serif; font-weight:600; font-size:13.5px; letter-spacing:0.06em; text-transform:uppercase;
+    text-align:center; cursor:pointer; transition:transform .15s ease, box-shadow .3s ease, background .3s ease;
+  }
+  .cta-btn:active{ transform:scale(0.98); }
+  .cta-btn.done{ background:linear-gradient(180deg, var(--gold), #A9862A); color:var(--ink-900); border-color:var(--gold-bright); box-shadow:0 8px 30px rgba(201,162,39,0.35); }
+
+  .share-btn{
+    display:none; align-items:center; justify-content:center; gap:8px;
+    width:100%; margin-top:16px; padding:13px 18px; border-radius:999px; border:1px solid var(--gold-dim);
+    background:transparent; color:var(--gold); font-family:'Cinzel', serif; font-weight:600; font-size:12px;
+    letter-spacing:0.05em; text-transform:uppercase; cursor:pointer;
+  }
+  .share-btn svg{ width:16px; height:16px; flex:none; }
+  .share-btn:active{ background:rgba(201,162,39,0.08); }
+
+  .share-preview-wrap{ margin-bottom:16px; text-align:center; min-height:40px; }
+  .share-preview-wrap img{ max-width:100%; max-height:50vh; border-radius:var(--radius-md); border:1px solid var(--gold-dim); }
+  .link-btn:disabled{ opacity:0.4; cursor:default; }
+
+  .prelaunch-badge{
+    display:block; width:100%; margin-top:22px; padding:16px 18px; border-radius:999px; border:1px dashed var(--ink-600);
+    color:var(--parchment-faint); font-family:'Cinzel', serif; font-weight:600; font-size:12px; letter-spacing:0.05em;
+    text-transform:uppercase; text-align:center;
+  }
+
+  .reflection{ margin-top:18px; text-align:center; font-size:12.5px; color:var(--parchment-dim); font-style:italic; line-height:1.5; padding:0 6px; }
+
+  .completed-banner{ margin-top:24px; text-align:center; padding:16px; border:1px solid var(--gold-dim); border-radius:var(--radius-md); background:rgba(201,162,39,0.06); }
+  .completed-banner p{ font-family:'Cinzel', serif; color:var(--gold-bright); font-size:13px; margin:0; letter-spacing:0.03em; }
+
+  /* ---------- Jornada ---------- */
+  .legend{ display:flex; flex-wrap:wrap; gap:12px 16px; margin-bottom:20px; }
+  .legend-item{ display:flex; align-items:center; gap:6px; font-size:10.5px; color:var(--parchment-faint); }
+  .legend-swatch{ width:14px; height:18px; flex:none; }
+  .legend-swatch svg{ width:100%; height:100%; }
+
+  .day-grid{ display:grid; grid-template-columns:repeat(8, 1fr); gap:10px 6px; }
+  .day-cell{ display:flex; flex-direction:column; align-items:center; gap:3px; position:relative; background:none; border:none; padding:2px 0; cursor:default; }
+  .day-cell.done{ cursor:pointer; }
+  .day-flame{ width:20px; height:26px; }
+  .day-flame svg{ width:100%; height:100%; display:block; }
+  .day-num{ font-family:'JetBrains Mono', monospace; font-size:8.5px; color:var(--parchment-faint); }
+  .day-cell.future .day-flame{ opacity:0.28; }
+  .day-cell.future .day-num{ opacity:0.4; }
+  .day-cell.missed .day-flame path{ fill:var(--wine); opacity:0.55; }
+  .day-cell.missed .day-num{ color:var(--wine-bright); }
+  .day-cell.today .day-flame{ filter:drop-shadow(0 0 6px rgba(201,162,39,0.5)); animation:pulseRing 2s ease-in-out infinite; }
+  .day-cell.today .day-flame path{ fill:none; stroke:var(--gold); stroke-width:6; }
+  .day-cell.done .day-flame path{ fill:var(--ember); }
+  .day-cell.done.today .day-flame path{ fill:var(--ember-core); stroke:none; }
+  .day-cell.done .day-flame{ filter:drop-shadow(0 0 8px rgba(255,122,60,0.55)); }
+  @keyframes pulseRing{ 0%,100%{ opacity:0.7;} 50%{ opacity:1;} }
+
+  /* ---------- Perfil ---------- */
+  .avatar-wrap{ display:flex; flex-direction:column; align-items:center; margin: 6px 0 26px; }
+  .avatar-btn{
+    position:relative; width:96px; height:96px; border-radius:50%; border:2px solid var(--gold-dim);
+    background:var(--ink-700); cursor:pointer; overflow:hidden; padding:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .avatar-btn img{ width:100%; height:100%; object-fit:cover; }
+  .avatar-btn svg{ width:44px; height:44px; opacity:0.5; }
+  .avatar-edit-badge{
+    position:absolute; bottom:0; right:0; width:28px; height:28px; border-radius:50%;
+    background:var(--gold); color:var(--ink-900); display:flex; align-items:center; justify-content:center;
+    font-size:13px; border:2px solid var(--ink-800);
+  }
+  .avatar-hint{ font-size:11px; color:var(--parchment-faint); margin-top:10px; }
+
+  .stats-row{ display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-top:26px; }
+  .stat-card{ background:var(--ink-700); border:1px solid var(--ink-600); border-radius:var(--radius-md); padding:14px 6px; text-align:center; }
+  .stat-num{ font-family:'Cinzel Decorative', serif; font-size:20px; color:var(--gold-bright); }
+  .stat-label{ font-size:9px; color:var(--parchment-faint); margin-top:4px; text-transform:uppercase; letter-spacing:0.05em; }
+
+  /* ---------- Iniciativa ---------- */
+  .info-block{ margin-bottom:26px; }
+  .info-block h3{ font-family:'Cinzel', serif; font-size:13.5px; color:var(--gold); margin:0 0 10px; letter-spacing:0.04em; }
+  .info-block p{ font-size:13px; color:var(--parchment-dim); line-height:1.7; margin:0 0 10px; }
+
+  /* ---------- Bottom nav ---------- */
+  .bottom-nav{
+    position:fixed; left:0; right:0; bottom:0; z-index:40;
+    max-width:480px; margin:0 auto;
+    height: calc(var(--nav-h) + var(--safe-bottom));
+    padding-bottom: var(--safe-bottom);
+    background:rgba(8,11,19,0.92); backdrop-filter:blur(10px);
+    border-top:1px solid rgba(138,112,32,0.3);
+    display:flex;
+  }
+  .nav-btn{
+    flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+    background:none; border:none; color:var(--parchment-faint); cursor:pointer; padding:6px 2px;
+  }
+  .nav-btn svg{ width:21px; height:21px; }
+  .nav-btn span{ font-family:'Cinzel', serif; font-size:9px; letter-spacing:0.04em; text-transform:uppercase; }
+  .nav-btn.active{ color:var(--gold-bright); }
+
+  /* ---------- Overlays ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(5,6,10,0.78); backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center; padding:24px; z-index:60;
+    opacity:0; pointer-events:none; transition:opacity .25s ease;
+  }
+  .overlay.show{ opacity:1; pointer-events:auto; }
+  .card{
+    width:100%; max-width:380px; max-height:88vh; overflow-y:auto;
+    background:linear-gradient(180deg, var(--ink-700), var(--ink-800));
+    border:1px solid var(--gold-dim); border-radius:var(--radius-lg); padding:26px 22px;
+    box-shadow:var(--shadow-deep); position:relative;
+  }
+  .card-icon{ width:34px; height:34px; margin:0 auto 14px; display:block; opacity:0.9; }
+  .card h2{ font-family:'Cinzel', serif; font-size:17px; text-align:center; margin:0 0 6px; color:var(--parchment); font-weight:600; }
+  .card p.hint{ text-align:center; font-size:12.5px; color:var(--parchment-dim); margin:0 0 20px; line-height:1.5; }
+
+  .field{ margin-bottom:16px; }
+  .field label{ display:block; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:6px; font-family:'Cinzel', serif;}
+  .field input[type=text], .field input[type=date]{
+    width:100%; background:var(--ink-900); border:1px solid var(--ink-600); color:var(--parchment);
+    padding:12px 14px; border-radius:var(--radius-sm); font-family:'Inter'; font-size:14.5px;
+  }
+  .field input:focus{ outline:2px solid var(--gold); outline-offset:1px; }
+
+  .primary-btn{
+    width:100%; padding:14px; border-radius:999px; border:none; cursor:pointer;
+    background:linear-gradient(180deg, var(--gold), #A9862A); color:var(--ink-900);
+    font-family:'Cinzel', serif; font-weight:700; font-size:13.5px; letter-spacing:0.05em;
+    text-transform:uppercase; margin-top:4px;
+  }
+  .primary-btn:disabled{ opacity:0.4; }
+  .link-btn{
+    display:block; width:100%; text-align:center; background:none; border:none; color:var(--wine-bright);
+    font-size:11.5px; margin-top:16px; cursor:pointer; text-decoration:underline;
+  }
+
+  .upload-zone{
+    border:1.5px dashed var(--gold-dim); border-radius:var(--radius-md); padding:26px 14px;
+    text-align:center; cursor:pointer; margin-bottom:16px; transition:border-color .2s ease, background .2s ease;
+  }
+  .upload-zone:active{ background:rgba(201,162,39,0.06); }
+  .upload-zone svg{ width:30px; height:30px; margin:0 auto 10px; opacity:0.75; }
+  .upload-zone .up-text{ font-size:12.5px; color:var(--parchment-dim); }
+  .upload-zone input[type=file]{ display:none; }
+  .preview-wrap{ margin-bottom:16px; text-align:center; }
+  .preview-wrap img{ max-width:100%; border-radius:var(--radius-md); border:1px solid var(--gold-dim); max-height:220px; }
+
+  .close-x{
+    position:absolute; top:14px; right:14px; width:26px; height:26px; border-radius:50%;
+    background:var(--ink-600); border:none; color:var(--parchment-dim); font-size:14px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  .toast{
+    position:fixed; left:50%; bottom:calc(var(--nav-h) + 20px + var(--safe-bottom)); transform:translateX(-50%) translateY(20px);
+    background:linear-gradient(180deg, var(--gold), #A9862A); color:var(--ink-900);
+    padding:12px 22px; border-radius:999px; font-family:'Cinzel', serif; font-weight:600; font-size:12.5px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.4); opacity:0; transition:opacity .35s ease, transform .35s ease;
+    z-index:70; pointer-events:none; white-space:nowrap;
+  }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001s !important; animation-iteration-count:1 !important; transition-duration:0.001s !important; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="flame-icon" viewBox="0 0 32 40">
+    <path d="M16 0c1 6-5 8-5 15 0 3 2 5 5 5s5-2 5-5c0-3-2-3-1-7 3 2 6 7 6 13 0 7-5 14-15 14S1 30 1 22C1 11 10 8 16 0z"/>
+  </symbol>
+</svg>
+
+<div class="app-shell">
+
+  <div class="topbar">
+    <svg viewBox="0 0 100 100" fill="none">
+      <path d="M50 8 L58 30 L50 24 L42 30 Z" fill="#C9A227"/>
+      <path d="M50 24 L50 78" stroke="#C9A227" stroke-width="2.4"/>
+      <path d="M32 40 L50 34 L68 40 L62 46 L50 42 L38 46 Z" fill="#C9A227"/>
+      <path d="M50 78 L38 88 M50 78 L62 88" stroke="#C9A227" stroke-width="2.4" stroke-linecap="round"/>
+      <circle cx="50" cy="14" r="3" fill="#F0C954"/>
+    </svg>
+    <span>São Miguel Arcanjo · Quaresma</span>
+  </div>
+
+  <main class="tab-content">
+
+    <!-- ===== HOME ===== -->
+    <section class="tab-panel active" id="tab-home">
+      <div class="home-hero">
+        <h1>Ofensiva dos 40 Dias do Propósito</h1>
+        <p class="subtitle">Firme na fé, dia após dia, até o fim da jornada.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="greeting">
+        <div class="greeting-name" id="greetingName">Que a paz esteja convosco</div>
+        <div class="day-count" id="dayCount">DIA — DE 40</div>
+        <div class="prelaunch-note" id="prelaunchNote" style="display:none"></div>
+      </div>
+
+      <div class="brazier-wrap" id="brazierWrap">
+        <div class="halo"></div>
+        <div class="flame-stage">
+          <div class="flame">
+            <div class="tongue t1"></div>
+            <div class="tongue t2"></div>
+            <div class="tongue t3"></div>
+          </div>
+          <div class="embers"><svg viewBox="0 0 70 16"><ellipse class="glow" cx="35" cy="8" rx="30" ry="6"/></svg></div>
+          <div class="brazier-base">
+            <svg viewBox="0 0 96 34" fill="none">
+              <path d="M8 4 L88 4 L74 30 L22 30 Z" fill="#141A2A" stroke="#8A7020" stroke-width="1.5"/>
+              <line x1="16" y1="4" x2="26" y2="30" stroke="#202940" stroke-width="1"/>
+              <line x1="48" y1="4" x2="48" y2="30" stroke="#202940" stroke-width="1"/>
+              <line x1="80" y1="4" x2="70" y2="30" stroke="#202940" stroke-width="1"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="flame-caption" id="flameCaption" style="display:none">A chama aguarda o primeiro dia da jornada.</div>
+
+      <div class="streak-badge" id="streakBadge">
+        <div class="streak-num" id="streakNum">0</div>
+        <div class="streak-label">dias de ofensiva</div>
+      </div>
+
+      <button class="cta-btn" id="ctaBtn">Confirmar presença de hoje</button>
+      <div class="prelaunch-badge" id="prelaunchBadge" style="display:none">Disponível no primeiro dia da jornada</div>
+
+      <p class="reflection" id="reflectionText"></p>
+
+      <button class="share-btn" id="shareBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.6" x2="15.4" y2="6.4"/><line x1="8.6" y1="13.4" x2="15.4" y2="17.6"/></svg>
+        Compartilhar ofensiva
+      </button>
+
+      <div class="completed-banner" id="completedBanner" style="display:none">
+        <p>✦ Jornada de 40 dias concluída. Que São Miguel vos guarde. ✦</p>
+      </div>
+    </section>
+
+    <!-- ===== JORNADA ===== -->
+    <section class="tab-panel" id="tab-jornada">
+      <div class="panel-header">
+        <h2>Jornada dos 40 Dias</h2>
+        <button class="icon-btn" id="journeySettingsBtn" aria-label="Ajustes da jornada">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.6 15a1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9c.24.6.79 1 1.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        </button>
+      </div>
+      <p class="panel-hint">Toque em um dia já concluído para rever o registro daquele dia.</p>
+
+      <div class="legend">
+        <div class="legend-item"><span class="legend-swatch"><svg viewBox="0 0 32 40"><use href="#flame-icon" fill="#FF7A3C"></use></svg></span>Feito</div>
+        <div class="legend-item"><span class="legend-swatch"><svg viewBox="0 0 32 40"><path d="M16 0c1 6-5 8-5 15 0 3 2 5 5 5s5-2 5-5c0-3-2-3-1-7 3 2 6 7 6 13 0 7-5 14-15 14S1 30 1 22C1 11 10 8 16 0z" fill="none" stroke="#C9A227" stroke-width="6"></path></svg></span>Hoje</div>
+        <div class="legend-item"><span class="legend-swatch"><svg viewBox="0 0 32 40"><use href="#flame-icon" fill="#6B1420" opacity="0.55"></use></svg></span>Perdido</div>
+        <div class="legend-item"><span class="legend-swatch"><svg viewBox="0 0 32 40"><use href="#flame-icon" fill="#7D7969" opacity="0.28"></use></svg></span>Por vir</div>
+      </div>
+
+      <div class="day-grid" id="dayGrid"></div>
+    </section>
+
+    <!-- ===== PERFIL ===== -->
+    <section class="tab-panel" id="tab-perfil">
+      <div class="panel-header"><h2>Perfil</h2></div>
+      <p class="panel-hint">Suas informações ficam salvas apenas neste aparelho.</p>
+
+      <div class="avatar-wrap">
+        <button class="avatar-btn" id="avatarBtn" aria-label="Alterar foto de perfil">
+          <img id="avatarImg" style="display:none" alt="Foto de perfil">
+          <svg id="avatarPlaceholder" viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+          <span class="avatar-edit-badge">✎</span>
+        </button>
+        <input type="file" id="avatarInput" accept="image/*" hidden>
+        <div class="avatar-hint">Toque para escolher sua foto</div>
+      </div>
+
+      <div class="field">
+        <label for="profileNameInput">Nome</label>
+        <input type="text" id="profileNameInput" maxlength="30">
+      </div>
+      <button class="primary-btn" id="saveProfileBtn">Salvar nome</button>
+
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num" id="statStreak">0</div><div class="stat-label">Ofensiva atual</div></div>
+        <div class="stat-card"><div class="stat-num" id="statBest">0</div><div class="stat-label">Recorde</div></div>
+        <div class="stat-card"><div class="stat-num" id="statTotal">0</div><div class="stat-label">Concluídos</div></div>
+      </div>
+    </section>
+
+    <!-- ===== INICIATIVA ===== -->
+    <section class="tab-panel" id="tab-iniciativa">
+      <div class="panel-header"><h2>A Iniciativa</h2></div>
+
+      <div class="info-block">
+        <h3>Quem somos</h3>
+        <p>Feito por um devoto, esta é uma iniciativa pessoal, desenvolvida por uma pessoa só, na madrugada que antecede a Quaresma de São Miguel Arcanjo. Julguei interessante a mecânica da ofensiva, pois ela me ajuda muito no Duolingo — então resolvi fazer um app seguro, intuitivo e legal para podermos manter nossa devoção, seja sozinhos, seja atualizando-a a cada dia com nossos amigos, motivando quem faz a continuar fazendo, e quem não conseguiu, perdeu um dia ou não pôde, a não desistir e continuar.</p>
+        <p style="margin-top:18px;">Atenciosamente,<br>Thalles Henrique Stein dos Santos</p>
+        <p style="font-style:italic; color:var(--gold-dim); margin-top:14px; margin-bottom:0;">Salve Maria, e Viva Cristo Rei.</p>
+      </div>
+
+      <div class="info-block">
+        <h3>A sua privacidade</h3>
+        <p>Este aplicativo não tem servidor, não pede login e não envia nada para a internet. Seu nome, sua foto de perfil e os registros de cada dia ficam guardados apenas na memória local deste navegador, no seu próprio celular ou computador.</p>
+        <p>Na prática, isso significa que é impossível para qualquer outra pessoa — inclusive quem criou este aplicativo — ter acesso ao que você guarda aqui. Ninguém recebe seus dados, porque eles nunca saem do seu aparelho.</p>
+        <p>Um cuidado importante: como tudo vive só no navegador, se você limpar os dados do site, trocar de celular ou desinstalar o navegador, o histórico se perde — não existe uma cópia em nuvem. Evite limpar os dados de navegação enquanto sua jornada estiver em andamento.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-tab="home">
+      <svg viewBox="0 0 32 40"><use href="#flame-icon" fill="currentColor"></use></svg>
+      <span>Início</span>
+    </button>
+    <button class="nav-btn" data-tab="jornada">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>
+      <span>Jornada</span>
+    </button>
+    <button class="nav-btn" data-tab="perfil">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+      <span>Perfil</span>
+    </button>
+    <button class="nav-btn" data-tab="iniciativa">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v6c0 4.8-3 8.8-7 9.9-4-1.1-7-5.1-7-9.9V6z"/><path d="M12 8v5M12 16h.01"/></svg>
+      <span>Iniciativa</span>
+    </button>
+  </nav>
+</div>
+
+<!-- Onboarding overlay -->
+<div class="overlay" id="onboardOverlay">
+  <div class="card">
+    <svg class="card-icon" viewBox="0 0 100 100" fill="none">
+      <path d="M50 8 L58 30 L50 24 L42 30 Z" fill="#C9A227"/>
+      <path d="M50 24 L50 78" stroke="#C9A227" stroke-width="2.4"/>
+      <path d="M32 40 L50 34 L68 40 L62 46 L50 42 L38 46 Z" fill="#C9A227"/>
+    </svg>
+    <h2>Sejam bem-vindos</h2>
+    <p class="hint">Antes de iniciar a batalha dos 40 dias, dizei-nos o vosso nome.</p>
+    <div class="field">
+      <label for="nameInput">Como podemos vos chamar?</label>
+      <input type="text" id="nameInput" placeholder="Seu nome" maxlength="30" autocomplete="given-name">
+    </div>
+    <button class="primary-btn" id="beginBtn">Começar minha jornada</button>
+  </div>
+</div>
+
+<!-- Upload / confirm overlay -->
+<div class="overlay" id="uploadOverlay">
+  <div class="card">
+    <button class="close-x" id="closeUpload">✕</button>
+    <h2>Confirmar presença</h2>
+    <p class="hint">Envie o print ou foto da live de hoje com o Frei para acender a chama.</p>
+    <label class="upload-zone" id="uploadZone">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="1.6"><path d="M4 16l4-5 3 3 5-7 4 6"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg>
+      <div class="up-text" id="uploadZoneText">Toque para escolher o print ou a foto</div>
+      <input type="file" accept="image/*" id="fileInput">
+    </label>
+    <div class="preview-wrap" id="previewWrap" style="display:none">
+      <img id="previewImg" alt="Prévia do envio de hoje">
+    </div>
+    <button class="primary-btn" id="confirmBtn" disabled>Acender a chama de hoje</button>
+  </div>
+</div>
+
+<!-- Journey settings overlay -->
+<div class="overlay" id="journeySettingsOverlay">
+  <div class="card">
+    <button class="close-x" id="closeJourneySettings">✕</button>
+    <h2>Ajustes da jornada</h2>
+    <p class="hint">A data oficial já vem definida pela organização — ajuste apenas se for realmente necessário.</p>
+    <div class="field">
+      <label for="editStart">Início da Quaresma</label>
+      <input type="date" id="editStart">
+    </div>
+    <button class="primary-btn" id="saveJourneySettingsBtn">Salvar</button>
+    <button class="link-btn" id="resetBtn">Reiniciar toda a jornada</button>
+  </div>
+</div>
+
+<!-- Day viewer overlay -->
+<div class="overlay" id="dayViewOverlay">
+  <div class="card">
+    <button class="close-x" id="closeDayView">✕</button>
+    <h2 id="dayViewTitle">Dia</h2>
+    <div class="preview-wrap" id="dayViewPreviewWrap">
+      <img id="dayViewImg" alt="Registro do dia">
+    </div>
+    <p class="hint" id="dayViewEmpty" style="display:none">Nenhum registro de imagem foi salvo para este dia.</p>
+  </div>
+</div>
+
+<!-- Share overlay -->
+<div class="overlay" id="shareOverlay">
+  <div class="card">
+    <button class="close-x" id="closeShare">✕</button>
+    <h2>Compartilhar ofensiva</h2>
+    <p class="hint">Envie seu cartão para os stories do Instagram ou o status do WhatsApp.</p>
+    <div class="share-preview-wrap">
+      <img id="sharePreviewImg" alt="Cartão da sua ofensiva" style="display:none">
+    </div>
+    <button class="primary-btn" id="shareNowBtn" style="display:none">Compartilhar</button>
+    <button class="link-btn" id="downloadShareBtn">Baixar imagem</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+  var STORAGE_KEY = "quaresmaSaoMiguel_v1";
+  var TOTAL_DAYS = 40;
+  // Data oficial de início da Quaresma de São Miguel Arcanjo.
+  // Ajuste aqui caso a data mude — todos os usuários herdam este valor por padrão.
+  var CAMPAIGN_START_DATE = "2026-08-15";
+
+  var REFLECTIONS = [
+    "Cada chama acesa é um passo firme na batalha do bem.",
+    "A disciplina de hoje é a vitória silenciosa de amanhã.",
+    "Onde há constância, há um coração que já venceu o medo.",
+    "São Miguel não guarda os que fogem, mas os que permanecem.",
+    "Um propósito sustentado dia a dia se torna caráter.",
+    "A luz que você acende hoje ilumina os próximos quarenta.",
+    "Fidelidade nas pequenas coisas revela grandeza de alma.",
+    "Não é a chama grande que vence, é a chama que não se apaga.",
+    "Perseverar em silêncio também é uma forma de coragem.",
+    "Cada dia vivido com propósito é uma pedra no altar da vitória."
+  ];
+  var PRELAUNCH_REFLECTION = "Prepare o coração. A vigília dos quarenta dias está prestes a começar.";
+  var PRELAUNCH_HEADLINES = ["Quase na hora, irmão!", "Está próximo.", "A vigília se aproxima."];
+
+  var data = null;
+  var pendingPhoto = null;
+  var pendingAvatar = null;
+
+  // ---------- storage ----------
+  function loadData(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return null;
+      return JSON.parse(raw);
+    }catch(e){ return null; }
+  }
+  function saveData(){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }catch(e){
+      try{
+        var slim = JSON.parse(JSON.stringify(data));
+        Object.keys(slim.days || {}).forEach(function(k){ delete slim.days[k].photo; });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(slim));
+      }catch(e2){ /* silencioso */ }
+    }
+  }
+
+  function todayKey(){ return formatKey(new Date()); }
+  function formatKey(d){
+    var y = d.getFullYear();
+    var m = String(d.getMonth()+1).padStart(2,"0");
+    var day = String(d.getDate()).padStart(2,"0");
+    return y+"-"+m+"-"+day;
+  }
+  function dateFromKey(k){
+    var parts = k.split("-").map(Number);
+    return new Date(parts[0], parts[1]-1, parts[2]);
+  }
+  function startOfDay(d){ var n = new Date(d); n.setHours(0,0,0,0); return n; }
+  function addDays(d, n){ var r = new Date(d); r.setDate(r.getDate()+n); return r; }
+
+  // ---------- elements ----------
+  var el = {
+    onboardOverlay: document.getElementById("onboardOverlay"),
+    nameInput: document.getElementById("nameInput"),
+    beginBtn: document.getElementById("beginBtn"),
+
+    tabPanels: document.querySelectorAll(".tab-panel"),
+    navBtns: document.querySelectorAll(".nav-btn"),
+
+    greetingName: document.getElementById("greetingName"),
+    dayCount: document.getElementById("dayCount"),
+    prelaunchNote: document.getElementById("prelaunchNote"),
+    brazierWrap: document.getElementById("brazierWrap"),
+    flameCaption: document.getElementById("flameCaption"),
+    streakNum: document.getElementById("streakNum"),
+    streakBadge: document.getElementById("streakBadge"),
+    ctaBtn: document.getElementById("ctaBtn"),
+    prelaunchBadge: document.getElementById("prelaunchBadge"),
+    reflectionText: document.getElementById("reflectionText"),
+    completedBanner: document.getElementById("completedBanner"),
+
+    dayGrid: document.getElementById("dayGrid"),
+    journeySettingsBtn: document.getElementById("journeySettingsBtn"),
+    journeySettingsOverlay: document.getElementById("journeySettingsOverlay"),
+    closeJourneySettings: document.getElementById("closeJourneySettings"),
+    editStart: document.getElementById("editStart"),
+    saveJourneySettingsBtn: document.getElementById("saveJourneySettingsBtn"),
+    resetBtn: document.getElementById("resetBtn"),
+
+    dayViewOverlay: document.getElementById("dayViewOverlay"),
+    closeDayView: document.getElementById("closeDayView"),
+    dayViewTitle: document.getElementById("dayViewTitle"),
+    dayViewImg: document.getElementById("dayViewImg"),
+    dayViewPreviewWrap: document.getElementById("dayViewPreviewWrap"),
+    dayViewEmpty: document.getElementById("dayViewEmpty"),
+
+    avatarBtn: document.getElementById("avatarBtn"),
+    avatarInput: document.getElementById("avatarInput"),
+    avatarImg: document.getElementById("avatarImg"),
+    avatarPlaceholder: document.getElementById("avatarPlaceholder"),
+    profileNameInput: document.getElementById("profileNameInput"),
+    saveProfileBtn: document.getElementById("saveProfileBtn"),
+    statStreak: document.getElementById("statStreak"),
+    statBest: document.getElementById("statBest"),
+    statTotal: document.getElementById("statTotal"),
+
+    uploadOverlay: document.getElementById("uploadOverlay"),
+    closeUpload: document.getElementById("closeUpload"),
+    uploadZone: document.getElementById("uploadZone"),
+    uploadZoneText: document.getElementById("uploadZoneText"),
+    fileInput: document.getElementById("fileInput"),
+    previewWrap: document.getElementById("previewWrap"),
+    previewImg: document.getElementById("previewImg"),
+    confirmBtn: document.getElementById("confirmBtn"),
+
+    shareBtn: document.getElementById("shareBtn"),
+    shareOverlay: document.getElementById("shareOverlay"),
+    closeShare: document.getElementById("closeShare"),
+    sharePreviewImg: document.getElementById("sharePreviewImg"),
+    shareNowBtn: document.getElementById("shareNowBtn"),
+    downloadShareBtn: document.getElementById("downloadShareBtn"),
+
+    toast: document.getElementById("toast")
+  };
+
+  // ---------- tab navigation ----------
+  el.navBtns.forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var tab = btn.getAttribute("data-tab");
+      el.navBtns.forEach(function(b){ b.classList.toggle("active", b === btn); });
+      el.tabPanels.forEach(function(p){ p.classList.toggle("active", p.id === "tab-" + tab); });
+    });
+  });
+
+  // ---------- onboarding ----------
+  function initOnboarding(){
+    el.onboardOverlay.classList.add("show");
+  }
+  el.beginBtn.addEventListener("click", function(){
+    var name = el.nameInput.value.trim();
+    if(!name){ el.nameInput.focus(); return; }
+    data = { name: name, startDate: CAMPAIGN_START_DATE, avatar: null, days: {} };
+    saveData();
+    el.onboardOverlay.classList.remove("show");
+    render();
+  });
+
+  // ---------- toast ----------
+  var toastTimer = null;
+  function showToast(msg){
+    el.toast.textContent = msg;
+    el.toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ el.toast.classList.remove("show"); }, 2600);
+  }
+
+  // ---------- computations ----------
+  function computeDayIndex(){
+    var start = startOfDay(dateFromKey(data.startDate));
+    var today = startOfDay(new Date());
+    return Math.round((today - start) / 86400000) + 1;
+  }
+
+  function computeStreak(){
+    var start = startOfDay(dateFromKey(data.startDate));
+    var today = startOfDay(new Date());
+    var cursor = new Date(today);
+    if(!(data.days[formatKey(cursor)] && data.days[formatKey(cursor)].done)){
+      cursor = addDays(cursor, -1);
+    }
+    var streak = 0;
+    while(cursor >= start){
+      var k = formatKey(cursor);
+      if(data.days[k] && data.days[k].done){ streak++; cursor = addDays(cursor, -1); }
+      else break;
+    }
+    return streak;
+  }
+
+  function computeBestStreak(){
+    var keys = Object.keys(data.days).filter(function(k){ return data.days[k].done; }).sort();
+    if(keys.length === 0) return 0;
+    var best = 1, run = 1;
+    for(var i=1;i<keys.length;i++){
+      var prev = dateFromKey(keys[i-1]);
+      var cur = dateFromKey(keys[i]);
+      var diff = Math.round((cur - prev) / 86400000);
+      if(diff === 1){ run++; } else { run = 1; }
+      if(run > best) best = run;
+    }
+    return best;
+  }
+
+  function computeTotalDone(){
+    return Object.keys(data.days).filter(function(k){ return data.days[k].done; }).length;
+  }
+
+  // ---------- render ----------
+  function render(){
+    if(!data) return;
+
+    el.greetingName.textContent = "Que a paz esteja convosco, " + data.name;
+
+    var dayIndex = computeDayIndex();
+    var isPrelaunch = dayIndex < 1;
+    var isCompleted = dayIndex > TOTAL_DAYS;
+    var tKey = todayKey();
+    var doneToday = !isPrelaunch && !!(data.days[tKey] && data.days[tKey].done);
+
+    if(isPrelaunch){
+      var daysRemaining = 1 - dayIndex;
+      var headline = PRELAUNCH_HEADLINES[daysRemaining % PRELAUNCH_HEADLINES.length];
+      el.dayCount.textContent = headline;
+      el.prelaunchNote.style.display = "block";
+      el.prelaunchNote.textContent = daysRemaining === 1
+        ? "A jornada começa amanhã."
+        : "Faltam " + daysRemaining + " dias para o início.";
+      el.flameCaption.style.display = "block";
+      el.ctaBtn.style.display = "none";
+      el.prelaunchBadge.style.display = "block";
+      el.completedBanner.style.display = "none";
+      el.reflectionText.textContent = PRELAUNCH_REFLECTION;
+      el.shareBtn.style.display = "none";
+    } else {
+      el.prelaunchNote.style.display = "none";
+      el.flameCaption.style.display = "none";
+      el.shareBtn.style.display = "flex";
+      var clamped = Math.max(1, Math.min(dayIndex, TOTAL_DAYS));
+      el.dayCount.textContent = "DIA " + clamped + " DE " + TOTAL_DAYS;
+      el.reflectionText.textContent = REFLECTIONS[(clamped-1) % REFLECTIONS.length];
+
+      if(isCompleted){
+        el.ctaBtn.style.display = "none";
+        el.prelaunchBadge.style.display = "none";
+        el.completedBanner.style.display = "block";
+      } else {
+        el.ctaBtn.style.display = "block";
+        el.prelaunchBadge.style.display = "none";
+        el.completedBanner.style.display = "none";
+        if(doneToday){
+          el.ctaBtn.textContent = "Presença confirmada hoje ✦";
+          el.ctaBtn.classList.add("done");
+        } else {
+          el.ctaBtn.textContent = "Confirmar presença de hoje";
+          el.ctaBtn.classList.remove("done");
+        }
+      }
+    }
+
+    el.brazierWrap.classList.toggle("lit", doneToday);
+    el.streakBadge.classList.toggle("lit", doneToday);
+    var streak = computeStreak();
+    el.streakNum.textContent = streak;
+
+    renderGrid(dayIndex);
+    renderProfile(streak);
+  }
+
+  function renderGrid(dayIndex){
+    el.dayGrid.innerHTML = "";
+    var start = startOfDay(dateFromKey(data.startDate));
+    var frag = document.createDocumentFragment();
+    for(var n=1; n<=TOTAL_DAYS; n++){
+      var cellDate = addDays(start, n-1);
+      var key = formatKey(cellDate);
+      var isDone = !!(data.days[key] && data.days[key].done);
+      var isToday = (n === dayIndex);
+      var isFuture = (n > dayIndex);
+      var isMissed = (!isDone && !isFuture && !isToday);
+
+      var cell = document.createElement("button");
+      cell.type = "button";
+      cell.className = "day-cell" +
+        (isDone ? " done" : "") +
+        (isToday ? " today" : "") +
+        (isFuture ? " future" : "") +
+        (isMissed ? " missed" : "");
+      cell.title = "Dia " + n + " — " + cellDate.toLocaleDateString("pt-BR");
+      cell.setAttribute("data-key", key);
+      cell.setAttribute("data-n", n);
+
+      var flameDiv = document.createElement("div");
+      flameDiv.className = "day-flame";
+      flameDiv.innerHTML = '<svg viewBox="0 0 32 40"><use href="#flame-icon"></use></svg>';
+
+      var numDiv = document.createElement("div");
+      numDiv.className = "day-num";
+      numDiv.textContent = n;
+
+      cell.appendChild(flameDiv);
+      cell.appendChild(numDiv);
+      if(isDone){
+        cell.addEventListener("click", function(){ openDayView(this.getAttribute("data-key"), this.getAttribute("data-n")); });
+      }
+      frag.appendChild(cell);
+    }
+    el.dayGrid.appendChild(frag);
+  }
+
+  function openDayView(key, n){
+    var entry = data.days[key];
+    var d = dateFromKey(key);
+    el.dayViewTitle.textContent = "Dia " + n + " — " + d.toLocaleDateString("pt-BR");
+    if(entry && entry.photo){
+      el.dayViewImg.src = entry.photo;
+      el.dayViewPreviewWrap.style.display = "block";
+      el.dayViewEmpty.style.display = "none";
+    } else {
+      el.dayViewPreviewWrap.style.display = "none";
+      el.dayViewEmpty.style.display = "block";
+    }
+    el.dayViewOverlay.classList.add("show");
+  }
+  el.closeDayView.addEventListener("click", function(){ el.dayViewOverlay.classList.remove("show"); });
+
+  function renderProfile(streak){
+    el.profileNameInput.value = data.name;
+    if(data.avatar){
+      el.avatarImg.src = data.avatar;
+      el.avatarImg.style.display = "block";
+      el.avatarPlaceholder.style.display = "none";
+    } else {
+      el.avatarImg.style.display = "none";
+      el.avatarPlaceholder.style.display = "block";
+    }
+    el.statStreak.textContent = streak;
+    el.statBest.textContent = computeBestStreak();
+    el.statTotal.textContent = computeTotalDone();
+  }
+
+  // ---------- confirmar presença / upload ----------
+  el.ctaBtn.addEventListener("click", function(){
+    var tKey = todayKey();
+    if(data.days[tKey] && data.days[tKey].done) return;
+    var dayIndex = computeDayIndex();
+    if(dayIndex > TOTAL_DAYS || dayIndex < 1) return;
+    openUpload();
+  });
+
+  function openUpload(){
+    pendingPhoto = null;
+    el.previewWrap.style.display = "none";
+    el.previewImg.src = "";
+    el.confirmBtn.disabled = true;
+    el.uploadZoneText.textContent = "Toque para escolher o print ou a foto";
+    el.fileInput.value = "";
+    el.uploadOverlay.classList.add("show");
+  }
+  el.closeUpload.addEventListener("click", function(){ el.uploadOverlay.classList.remove("show"); });
+  el.uploadZone.addEventListener("click", function(e){ if(e.target !== el.fileInput) el.fileInput.click(); });
+
+  el.fileInput.addEventListener("change", function(){
+    var file = el.fileInput.files && el.fileInput.files[0];
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      compressImage(ev.target.result, 400, 0.55, function(compressed){
+        pendingPhoto = compressed;
+        el.previewImg.src = compressed;
+        el.previewWrap.style.display = "block";
+        el.uploadZoneText.textContent = "Toque para escolher outra imagem";
+        el.confirmBtn.disabled = false;
+      });
+    };
+    reader.readAsDataURL(file);
+  });
+
+  function compressImage(dataUrl, maxW, quality, callback){
+    var img = new Image();
+    img.onload = function(){
+      var scale = Math.min(1, maxW / img.width);
+      var canvas = document.createElement("canvas");
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      try{ callback(canvas.toDataURL("image/jpeg", quality)); }
+      catch(e){ callback(dataUrl); }
+    };
+    img.onerror = function(){ callback(dataUrl); };
+    img.src = dataUrl;
+  }
+
+  el.confirmBtn.addEventListener("click", function(){
+    if(!pendingPhoto) return;
+    var tKey = todayKey();
+    data.days[tKey] = { done:true, photo: pendingPhoto, ts: Date.now() };
+    saveData();
+    el.uploadOverlay.classList.remove("show");
+    render();
+    var s = computeStreak();
+    showToast("Chama acesa! Ofensiva: " + s + (s===1 ? " dia" : " dias"));
+  });
+
+  // ---------- journey settings ----------
+  el.journeySettingsBtn.addEventListener("click", function(){
+    el.editStart.value = data.startDate;
+    el.journeySettingsOverlay.classList.add("show");
+  });
+  el.closeJourneySettings.addEventListener("click", function(){ el.journeySettingsOverlay.classList.remove("show"); });
+  el.saveJourneySettingsBtn.addEventListener("click", function(){
+    var start = el.editStart.value;
+    if(!start) return;
+    data.startDate = start;
+    saveData();
+    el.journeySettingsOverlay.classList.remove("show");
+    render();
+    showToast("Ajustes salvos");
+  });
+  el.resetBtn.addEventListener("click", function(){
+    if(confirm("Isso vai apagar toda a sua jornada salva neste aparelho. Deseja continuar?")){
+      localStorage.removeItem(STORAGE_KEY);
+      el.journeySettingsOverlay.classList.remove("show");
+      data = null;
+      initOnboarding();
+    }
+  });
+
+  // ---------- perfil ----------
+  el.avatarBtn.addEventListener("click", function(){ el.avatarInput.click(); });
+  el.avatarInput.addEventListener("change", function(){
+    var file = el.avatarInput.files && el.avatarInput.files[0];
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      compressImage(ev.target.result, 240, 0.6, function(compressed){
+        data.avatar = compressed;
+        saveData();
+        renderProfile(computeStreak());
+        showToast("Foto atualizada");
+      });
+    };
+    reader.readAsDataURL(file);
+  });
+  el.saveProfileBtn.addEventListener("click", function(){
+    var name = el.profileNameInput.value.trim();
+    if(!name) return;
+    data.name = name;
+    saveData();
+    render();
+    showToast("Nome salvo");
+  });
+
+  // ---------- compartilhar ofensiva ----------
+  var SHARE_ICON_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">' +
+    '<path d="M50 8 L58 30 L50 24 L42 30 Z" fill="#C9A227"/>' +
+    '<path d="M50 24 L50 78" stroke="#C9A227" stroke-width="2.4"/>' +
+    '<path d="M32 40 L50 34 L68 40 L62 46 L50 42 L38 46 Z" fill="#C9A227"/>' +
+    '<path d="M50 78 L38 88 M50 78 L62 88" stroke="#C9A227" stroke-width="2.4" stroke-linecap="round"/>' +
+    '<circle cx="50" cy="14" r="3" fill="#F0C954"/>' +
+    '</svg>';
+
+  var SHARE_FLAME_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40">' +
+    '<defs><linearGradient id="fg" x1="0" y1="0" x2="0" y2="1">' +
+    '<stop offset="0%" stop-color="#FFD27A"/>' +
+    '<stop offset="45%" stop-color="#FF7A3C"/>' +
+    '<stop offset="100%" stop-color="#9C2436"/>' +
+    '</linearGradient></defs>' +
+    '<path d="M16 0c1 6-5 8-5 15 0 3 2 5 5 5s5-2 5-5c0-3-2-3-1-7 3 2 6 7 6 13 0 7-5 14-15 14S1 30 1 22C1 11 10 8 16 0z" fill="url(#fg)"/>' +
+    '</svg>';
+
+  function svgToImage(svgStr){
+    return new Promise(function(resolve, reject){
+      var img = new Image();
+      img.onload = function(){ resolve(img); };
+      img.onerror = reject;
+      img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgStr);
+    });
+  }
+
+  function roundRectPath(ctx, x, y, w, h, r){
+    ctx.beginPath();
+    ctx.moveTo(x+r, y);
+    ctx.arcTo(x+w, y, x+w, y+h, r);
+    ctx.arcTo(x+w, y+h, x, y+h, r);
+    ctx.arcTo(x, y+h, x, y, r);
+    ctx.arcTo(x, y, x+w, y, r);
+    ctx.closePath();
+  }
+
+  var pendingShareBlob = null;
+  var pendingShareUrl = null;
+
+  function generateShareCard(){
+    var W = 1080, H = 1920;
+    var canvas = document.createElement("canvas");
+    canvas.width = W; canvas.height = H;
+    var ctx = canvas.getContext("2d");
+    var streakVal = computeStreak();
+    var todayStr = new Date().toLocaleDateString("pt-BR", { day:"numeric", month:"long", year:"numeric" });
+    var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+
+    return Promise.all([svgToImage(SHARE_ICON_SVG), svgToImage(SHARE_FLAME_SVG), fontsReady]).then(function(res){
+      var iconImg = res[0], flameImg = res[1];
+
+      var bg = ctx.createLinearGradient(0,0,0,H);
+      bg.addColorStop(0, "#0E1322");
+      bg.addColorStop(1, "#080B13");
+      ctx.fillStyle = bg;
+      ctx.fillRect(0,0,W,H);
+
+      var glow1 = ctx.createRadialGradient(W/2, H*0.24, 40, W/2, H*0.24, W*0.95);
+      glow1.addColorStop(0, "rgba(201,162,39,0.22)");
+      glow1.addColorStop(1, "rgba(201,162,39,0)");
+      ctx.fillStyle = glow1;
+      ctx.fillRect(0,0,W,H);
+
+      var glow2 = ctx.createRadialGradient(W*0.82, H*0.1, 20, W*0.82, H*0.1, W*0.6);
+      glow2.addColorStop(0, "rgba(107,20,32,0.28)");
+      glow2.addColorStop(1, "rgba(107,20,32,0)");
+      ctx.fillStyle = glow2;
+      ctx.fillRect(0,0,W,H);
+
+      var starSeeds = [[0.12,0.08],[0.85,0.06],[0.25,0.16],[0.7,0.14],[0.9,0.22],[0.15,0.3],[0.75,0.32],[0.08,0.45],[0.92,0.5],[0.2,0.62],[0.82,0.65],[0.12,0.78],[0.88,0.82],[0.5,0.05]];
+      ctx.fillStyle = "rgba(239,230,211,0.45)";
+      starSeeds.forEach(function(p){
+        ctx.beginPath();
+        ctx.arc(p[0]*W, p[1]*H, 2.2, 0, Math.PI*2);
+        ctx.fill();
+      });
+
+      ctx.strokeStyle = "rgba(138,112,32,0.4)";
+      ctx.lineWidth = 3;
+      roundRectPath(ctx, 36, 36, W-72, H-72, 28);
+      ctx.stroke();
+
+      ctx.drawImage(iconImg, W/2 - 44, 108, 88, 88);
+
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#C9A227";
+      ctx.font = "600 30px Cinzel, serif";
+      ctx.letterSpacing = "5px";
+      ctx.fillText("SÃO MIGUEL ARCANJO · QUARESMA", W/2, 300);
+      ctx.letterSpacing = "0px";
+
+      var divGrad = ctx.createLinearGradient(W*0.15,0,W*0.85,0);
+      divGrad.addColorStop(0,"rgba(138,112,32,0)");
+      divGrad.addColorStop(0.5,"#C9A227");
+      divGrad.addColorStop(1,"rgba(138,112,32,0)");
+      ctx.fillStyle = divGrad;
+      ctx.fillRect(W*0.15, 336, W*0.7, 2);
+
+      var name = (data && data.name) ? data.name : "";
+      var nameText = "A ofensiva de " + name;
+      var nameSize = 46;
+      ctx.fillStyle = "#EFE6D3";
+      ctx.font = "600 " + nameSize + "px Cinzel, serif";
+      while(ctx.measureText(nameText).width > W*0.8 && nameSize > 26){
+        nameSize -= 2;
+        ctx.font = "600 " + nameSize + "px Cinzel, serif";
+      }
+      ctx.fillText(nameText, W/2, 440);
+
+      ctx.save();
+      ctx.shadowColor = "rgba(255,122,60,0.65)";
+      ctx.shadowBlur = 90;
+      var flameW = 340, flameH = flameW * (40/32);
+      ctx.drawImage(flameImg, W/2 - flameW/2, 520, flameW, flameH);
+      ctx.restore();
+
+      ctx.fillStyle = "#F0C954";
+      ctx.font = "700 280px 'Cinzel Decorative', serif";
+      ctx.shadowColor = "rgba(240,201,84,0.55)";
+      ctx.shadowBlur = 55;
+      ctx.fillText(String(streakVal), W/2, 1300);
+      ctx.shadowBlur = 0;
+
+      ctx.fillStyle = "#B7AF9C";
+      ctx.font = "600 32px Cinzel, serif";
+      ctx.letterSpacing = "6px";
+      ctx.fillText(streakVal === 1 ? "DIA DE OFENSIVA" : "DIAS DE OFENSIVA", W/2, 1365);
+      ctx.letterSpacing = "0px";
+
+      ctx.fillStyle = "#B7AF9C";
+      ctx.font = "500 32px 'JetBrains Mono', monospace";
+      ctx.fillText(todayStr, W/2, 1445);
+
+      ctx.fillStyle = divGrad;
+      ctx.fillRect(W*0.15, 1710, W*0.7, 2);
+      ctx.fillStyle = "#8A7020";
+      ctx.font = "italic 500 28px Inter, sans-serif";
+      ctx.fillText("Quaresma de São Miguel Arcanjo · 40 Dias do Propósito", W/2, 1765);
+      ctx.fillStyle = "#7D7969";
+      ctx.font = "italic 600 26px Cinzel, serif";
+      ctx.fillText("Salve Maria, e Viva Cristo Rei", W/2, 1815);
+
+      return new Promise(function(resolve){
+        canvas.toBlob(function(blob){ resolve(blob); }, "image/png", 0.95);
+      });
+    });
+  }
+
+  function openShareOverlay(){
+    el.shareNowBtn.disabled = true;
+    el.downloadShareBtn.disabled = true;
+    el.sharePreviewImg.style.display = "none";
+    el.shareOverlay.classList.add("show");
+    generateShareCard().then(function(blob){
+      pendingShareBlob = blob;
+      if(pendingShareUrl) URL.revokeObjectURL(pendingShareUrl);
+      pendingShareUrl = URL.createObjectURL(blob);
+      el.sharePreviewImg.src = pendingShareUrl;
+      el.sharePreviewImg.style.display = "block";
+      el.shareNowBtn.disabled = false;
+      el.downloadShareBtn.disabled = false;
+
+      var canNativeShare = false;
+      try{
+        var testFile = new File([blob], "ofensiva.png", { type:"image/png" });
+        canNativeShare = !!(navigator.canShare && navigator.canShare({ files:[testFile] }));
+      }catch(e){ canNativeShare = false; }
+      el.shareNowBtn.style.display = canNativeShare ? "block" : "none";
+    }).catch(function(){
+      showToast("Não foi possível gerar o cartão");
+      el.shareOverlay.classList.remove("show");
+    });
+  }
+
+  el.shareBtn.addEventListener("click", openShareOverlay);
+  el.closeShare.addEventListener("click", function(){ el.shareOverlay.classList.remove("show"); });
+
+  el.downloadShareBtn.addEventListener("click", function(){
+    if(!pendingShareBlob) return;
+    var a = document.createElement("a");
+    a.href = pendingShareUrl;
+    a.download = "ofensiva-dia-" + computeStreak() + ".png";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  });
+
+  el.shareNowBtn.addEventListener("click", function(){
+    if(!pendingShareBlob) return;
+    var file = new File([pendingShareBlob], "ofensiva.png", { type:"image/png" });
+    if(navigator.canShare && navigator.canShare({ files:[file] })){
+      navigator.share({
+        files:[file],
+        title:"Minha ofensiva da Quaresma de São Miguel Arcanjo",
+        text:"Firme na fé, dia após dia — esta é a minha ofensiva."
+      }).catch(function(){ /* usuário cancelou o compartilhamento */ });
+    }
+  });
+
+  // ---------- overlay backdrop close ----------
+  [el.uploadOverlay, el.journeySettingsOverlay, el.dayViewOverlay, el.shareOverlay].forEach(function(ov){
+    ov.addEventListener("click", function(e){ if(e.target === ov) ov.classList.remove("show"); });
+  });
+
+  // ---------- init ----------
+  data = loadData();
+  if(!data || !data.name){
+    initOnboarding();
+  } else {
+    if(!("avatar" in data)) data.avatar = null;
+    render();
+  }
+})();
+</script>
+</body>
+</html>
